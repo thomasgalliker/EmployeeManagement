@@ -1,0 +1,5 @@
+﻿<%@ ServiceHost
+    Language="C#"
+    Debug="true"
+    Service="Employee.Service.EmployeeService, Employee.Service"
+    Factory="Autofac.Integration.Wcf.AutofacServiceHostFactory, Autofac.Integration.Wcf" %>
