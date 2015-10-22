@@ -8,20 +8,20 @@ namespace Employee.DataAccess
     [DbConfigurationType(typeof(EmployeeDbConfiguration))]
     public class EmployeeContext : DbContextBase, IEmployeeContext
     {
-        static EmployeeContext()
+        public EmployeeContext(IDatabaseInitializer<EmployeeContext> initializer = null)
         {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<EmployeeContext>()); //Default one
-            //Database.SetInitializer<EmployeeContext>(new DropCreateDatabaseIfModelChanges<EmployeeContext>()); //Drop database if changes detected
-            //Database.SetInitializer<EmployeeContext>(new DropCreateDatabaseAlways<EmployeeContext>()); //Drop database every times
-            //Database.SetInitializer<YourContext>(new CustomInitializer<YourContext>()); //Custom if model changed and seed values
-            //Database.SetInitializer<EmployeeContext>(null); //Nothing is done
-
-        }
-
-        public EmployeeContext()
-        {
-            ////Debug.Write(this.Database.Connection.ConnectionString);
-            ////Database.SetInitializer(new DropCreateDatabaseAlways<EmployeeContext>());
+            if (initializer == null)
+            {
+                Database.SetInitializer(new CreateDatabaseIfNotExists<EmployeeContext>()); //Default one
+                //Database.SetInitializer<EmployeeContext>(new DropCreateDatabaseIfModelChanges<EmployeeContext>()); //Drop database if changes detected
+                //Database.SetInitializer<EmployeeContext>(new DropCreateDatabaseAlways<EmployeeContext>()); //Drop database every times
+                //Database.SetInitializer<YourContext>(new CustomInitializer<YourContext>()); //Custom if model changed and seed values
+                //Database.SetInitializer<EmployeeContext>(null); //Nothing is done
+            }
+            else
+            {
+                Database.SetInitializer(initializer);
+            }
         }
 
         public EmployeeContext(string databaseName)

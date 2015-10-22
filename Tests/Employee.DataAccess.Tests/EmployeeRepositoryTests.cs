@@ -1,4 +1,5 @@
 ﻿
+using System.Data.Entity;
 using System.Linq;
 
 using Employee.DataAccess.Abstractions;
@@ -18,7 +19,7 @@ namespace Employee.DataAccess.Tests
         public void ShouldReturnEmptyGetAll()
         {
             // Arrange
-            using (IEmployeeContext employeeContext = new EmployeeContext())
+            using (IEmployeeContext employeeContext = new EmployeeContext(new DropCreateDatabaseAlways<EmployeeContext>()))
             {
                 IEmployeeRepository employeeRepository = new EmployeeRepository(employeeContext);
 
@@ -34,7 +35,7 @@ namespace Employee.DataAccess.Tests
         public void ShouldAddEmployee()
         {
             // Arrange
-            using (IEmployeeContext employeeContext = new EmployeeContext())
+            using (IEmployeeContext employeeContext = new EmployeeContext(new DropCreateDatabaseAlways<EmployeeContext>()))
             {
                 IEmployeeRepository employeeRepository = new EmployeeRepository(employeeContext);
                 var employee = CreateEntity.Employee1;
@@ -56,7 +57,7 @@ namespace Employee.DataAccess.Tests
         public void ShouldDeleteEmployee()
         {
             // Arrange
-            using (IEmployeeContext employeeContext = new EmployeeContext())
+            using (IEmployeeContext employeeContext = new EmployeeContext(new DropCreateDatabaseAlways<EmployeeContext>()))
             {
                 IEmployeeRepository employeeRepository = new EmployeeRepository(employeeContext);
                 var employee1 = CreateEntity.Employee1;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.ServiceModel.Web;
 
 using Autofac;
 using Autofac.Core.Lifetime;
@@ -39,6 +40,7 @@ namespace Employee.Service
             }
         }
 
+        [WebGet(UriTemplate = "/getallemployees", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         public IEnumerable<EmployeeDto> GetAllEmployees()
         {
             try
