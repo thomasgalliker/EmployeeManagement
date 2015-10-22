@@ -13,10 +13,12 @@ Furthermore, the aim of this project was to show the interplay of the mentioned 
 
 ### Helpful links
 Creating WCF REST services
+
 http://www.codeproject.com/Articles/571813/A-Beginners-Tutorial-on-Creating-WCF-REST-Services
 
 Using MVVMLight in a WPF application
+
 http://www.dotnetcurry.com/wpf/1037/mvvm-light-wpf-model-view-viewmodel
 
-### Copyright
-(c)2015 Thomas Galliker
+### License 
+Copyright &copy; 2015 [Thomas Galliker](https://ch.linkedin.com/in/thomasgalliker). Free for non-commercial use. For commercial use please contact the author. 
