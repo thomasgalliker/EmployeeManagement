@@ -7,7 +7,7 @@ It contains a collection of patterns and services which are used in enterprise a
 - EntityFramework code-first database context
 - UnitOfWork and repository pattern
 - Restful WCF service with JSON
-- Multi-platform client access
+- Multi-platform client access, using DTOs to exchange information with the backend
 
 Furthermore, the aim of this project was to show the interplay of the mentioned technologies.
 
