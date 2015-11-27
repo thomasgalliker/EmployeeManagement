@@ -29,16 +29,8 @@ namespace Employee.WebApi
             builder.RegisterAssemblyModules(Assembly.Load("Employee.DataAccess"));
             builder.RegisterAssemblyModules(Assembly.Load("Employee.BusinessLogic"));
 
-            //builder.RegisterInstance<IPostRepository>(new InMemoryPostRepository());
-
-            ////builder.RegisterApiControllers(Assembly.GetExecutingAssembly()); OR:
-
-            builder.RegisterAssemblyTypes(
-             Assembly.GetExecutingAssembly())
-                .Where(t =>
-                      !t.IsAbstract && typeof(ApiController).IsAssignableFrom(t))
-                   .InstancePerMatchingLifetimeScope();
-
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+           
             var container = builder.Build();
             var resolver = new AutofacWebApiDependencyResolver(container);
             config.DependencyResolver = resolver;
