@@ -9,7 +9,12 @@ It contains a collection of patterns and services which are used in enterprise a
 - Restful WCF service with JSON
 - Multi-platform client access, using DTOs to exchange information with the backend
 
-Furthermore, the aim of this project was to show the interplay of the mentioned technologies.
+Furthermore, the aim of this project was to show the interplay of the mentioned technologies, principles and practices.
+
+### Missing points
+- User management, authentication and authorization
+- Web client
+- Cross-platform mobile clients
 
 ### Helpful links
 Creating WCF REST services
