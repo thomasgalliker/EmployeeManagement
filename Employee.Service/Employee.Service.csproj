@@ -134,8 +134,8 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>start XCOPY /Y /R "$(SolutionDir)Employee.BusinessLogic\bin\$(ConfigurationName)\*" "$(ProjectDir)bin\"
-start XCOPY /Y /R "$(SolutionDir)Employee.DataAccess\bin\$(ConfigurationName)\*" "$(ProjectDir)bin\"</PostBuildEvent>
+    <PostBuildEvent>XCOPY /Y /R "$(SolutionDir)Employee.BusinessLogic\bin\$(ConfigurationName)\*" "$(ProjectDir)bin\"
+XCOPY /Y /R "$(SolutionDir)Employee.DataAccess\bin\$(ConfigurationName)\*" "$(ProjectDir)bin\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

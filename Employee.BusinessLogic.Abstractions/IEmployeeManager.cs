@@ -6,11 +6,11 @@ namespace Employee.BusinessLogic.Abstractions
 {
     public interface IEmployeeManager
     {
-        IEnumerable<Model.Employee> GetAllEmployees();
+        IEnumerable<Model.Employee> GetAllEmployees(); // BUG: Should be ICollection instead of IEnumerable
 
         void CreateEmployee(Model.Employee employee);
 
-        IEnumerable<Department> GetAllDepartments();
+        IEnumerable<Department> GetAllDepartments(); // BUG: Should be ICollection instead of IEnumerable
 
         void CreateDepartment(Department department);
     }

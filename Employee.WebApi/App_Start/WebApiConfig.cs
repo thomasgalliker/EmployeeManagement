@@ -30,7 +30,7 @@ namespace Employee.WebApi
             builder.RegisterAssemblyModules(Assembly.Load("Employee.BusinessLogic"));
 
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
-           
+
             var container = builder.Build();
             var resolver = new AutofacWebApiDependencyResolver(container);
             config.DependencyResolver = resolver;
