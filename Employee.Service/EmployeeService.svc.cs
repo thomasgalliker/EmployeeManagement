@@ -9,6 +9,7 @@ using Autofac.Core.Lifetime;
 using Autofac.Integration.Wcf;
 
 using Employee.BusinessLogic.Abstractions;
+using Employee.Mapping.Abstraction;
 using Employee.Model;
 using Employee.Service.Contracts.DataContracts;
 using Employee.Service.Contracts.ServiceContracts;
@@ -18,8 +19,15 @@ namespace Employee.Service
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class EmployeeService : IEmployeeService
     {
-        public EmployeeService()
+        private IMapper<Model.Employee, EmployeeDto> employeeToDtoMapper;
+        private readonly IMapper<EmployeeDto, Model.Employee> dtoToEmployeeMapper;
+
+        public EmployeeService(
+            IMapper<Model.Employee, EmployeeDto> employeeToDtoMapper, 
+            IMapper<EmployeeDto, Model.Employee> dtoToEmployeeMapper)
         {
+            this.employeeToDtoMapper = employeeToDtoMapper;
+            this.dtoToEmployeeMapper = dtoToEmployeeMapper;
         }
 
         public void CreateEmployee(EmployeeDto employeeDto)
@@ -30,7 +38,7 @@ namespace Employee.Service
                 {
                     var employeeService = httpRequestScope.Resolve<IEmployeeManager>();
 
-                    var employee = this.ConvertToEntity(employeeDto);
+                    var employee = this.dtoToEmployeeMapper.Map(employeeDto);
                     employeeService.CreateEmployee(employee);
                 }
             }
@@ -82,9 +90,9 @@ namespace Employee.Service
         {
             return new Department
                        {
-                           Name = departmentDto.Name, 
-                           Leader = this.ConvertToEntity(departmentDto.Leader),
-                           Employees = departmentDto.Employees.Select(this.ConvertToEntity).ToList()
+                           Name = departmentDto.Name,
+                           Leader = this.dtoToEmployeeMapper.Map(departmentDto.Leader),
+                           Employees = departmentDto.Employees.Select(this.dtoToEmployeeMapper.Map).ToList()
                        };
         }
 
@@ -107,29 +115,9 @@ namespace Employee.Service
             }
         }
 
-        private Model.Employee ConvertToEntity(EmployeeDto employee)
-        {
-            return new Model.Employee
-                        {
-                            FirstName = employee.FirstName,
-                            LastName = employee.LastName, 
-                            Birthdate = employee.Birthdate
-                        };
-        }
-
         private IEnumerable<EmployeeDto> ConvertToDto(IEnumerable<Model.Employee> allEmployees)
         {
-            return allEmployees.Select(this.ConvertToDto).ToList();
-        }
-        
-        private EmployeeDto ConvertToDto(Model.Employee employee)
-        {
-            return  new EmployeeDto
-                    {
-                        FirstName = employee.FirstName,
-                        LastName = employee.LastName,
-                        Birthdate = employee.Birthdate.Value
-                    };
+            return allEmployees.Select(this.employeeToDtoMapper.Map).ToList();
         }
 
         private IEnumerable<DepartmentDto> ConvertToDto(IEnumerable<Model.Department> allDepartments)
@@ -138,8 +126,8 @@ namespace Employee.Service
                 new DepartmentDto
                 {
                     Name = department.Name,
-                    Leader = this.ConvertToDto(department.Leader),
-                    Employees = department.Employees.Select(this.ConvertToDto).ToList()
+                    Leader = this.employeeToDtoMapper.Map(department.Leader),
+                    Employees = department.Employees.Select(this.employeeToDtoMapper.Map).ToList()
                 }).ToList();
         }
     }

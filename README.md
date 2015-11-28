@@ -17,12 +17,32 @@ Furthermore, the aim of this project was to show the interplay of the mentioned 
 - Cross-platform mobile clients
 
 ### Helpful links
-Creating WCF REST services
 
+Generic repository pattern, unit of work, entity framework in MVC
+http://techbrij.com/generic-repository-unit-of-work-entity-framework-unit-testing-asp-net-mvc
+
+Autofac for MVC
+http://techbrij.com/autofac-ioc-container-asp-net-mvc-di
+
+Autofac for WebApi
+http://docs.autofac.org/en/latest/integration/webapi.html
+
+Using Web API 2 with Entity Framework 6
+http://www.asp.net/web-api/overview/data/using-web-api-with-entity-framework/part-1
+
+Dependency Injection in ASP.NET Web API 2
+http://www.asp.net/web-api/overview/advanced/dependency-injection
+
+Exception Handling in ASP.NET Web API
+http://www.asp.net/web-api/overview/error-handling/exception-handling
+
+Automated Testing of ASP.NET Web API and MVC applications
+https://robdmoore.id.au/blog/2013/02/02/automated-testing-of-asp-net-web-api-and-mvc-applications/
+
+Creating WCF REST services
 http://www.codeproject.com/Articles/571813/A-Beginners-Tutorial-on-Creating-WCF-REST-Services
 
 Using MVVMLight in a WPF application
-
 http://www.dotnetcurry.com/wpf/1037/mvvm-light-wpf-model-view-viewmodel
 
 ### License 

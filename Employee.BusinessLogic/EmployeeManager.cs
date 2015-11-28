@@ -29,7 +29,7 @@ namespace Employee.BusinessLogic
 
             this.unitOfWork = unitOfWork;
             this.unitOfWork.RegisterContext(employeeRepository.Context);
-            this.unitOfWork.RegisterContext(departmentRepository.Context);
+            this.unitOfWork.RegisterContext(departmentRepository.Context); // BUG: They both share the same context; no need to register 2x
         }
 
         public IEnumerable<Model.Employee> GetAllEmployees()
@@ -37,12 +37,14 @@ namespace Employee.BusinessLogic
             return this.employeeRepository.GetAll();
         }
 
-        public void CreateEmployee(Model.Employee employee)
+        public Model.Employee CreateEmployee(Model.Employee employee)
         {
             Guard.ArgumentNotNull(() => employee);
 
             this.employeeRepository.Add(employee);
             this.unitOfWork.Commit();
+
+            return employee;
         }
 
         public IEnumerable<Department> GetAllDepartments()
