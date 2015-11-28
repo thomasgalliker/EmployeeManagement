@@ -6,6 +6,8 @@ using System.Web.Http;
 
 using Employee.BusinessLogic.Abstractions;
 
+using Guards;
+
 namespace Employee.WebApi.Controllers
 {
     public class EmployeeController : ApiController
@@ -14,6 +16,8 @@ namespace Employee.WebApi.Controllers
 
         public EmployeeController(IEmployeeManager employeeManager)
         {
+            Guard.ArgumentNotNull(() => employeeManager);
+
             this.employeeManager = employeeManager;
         }
 
