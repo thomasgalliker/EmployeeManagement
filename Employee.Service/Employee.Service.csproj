@@ -29,6 +29,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -89,6 +90,7 @@
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -98,6 +100,10 @@
     <ProjectReference Include="..\Employee.BusinessLogic.Abstractions\Employee.BusinessLogic.Abstractions.csproj">
       <Project>{152350ed-4f0c-4870-9f6d-09d7866916da}</Project>
       <Name>Employee.BusinessLogic.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Employee.Mapping.Abstraction\Employee.Mapping.Abstraction.csproj">
+      <Project>{63b2ae1f-5f2b-41a9-86d1-51abfdf73cec}</Project>
+      <Name>Employee.Mapping.Abstraction</Name>
     </ProjectReference>
     <ProjectReference Include="..\Employee.Model\Employee.Model.csproj">
       <Project>{f351b308-3b22-4949-9ac0-507c8b0c3bd5}</Project>
@@ -135,7 +141,8 @@
   </ProjectExtensions>
   <PropertyGroup>
     <PostBuildEvent>XCOPY /Y /R "$(SolutionDir)Employee.BusinessLogic\bin\$(ConfigurationName)\*" "$(ProjectDir)bin\"
-XCOPY /Y /R "$(SolutionDir)Employee.DataAccess\bin\$(ConfigurationName)\*" "$(ProjectDir)bin\"</PostBuildEvent>
+XCOPY /Y /R "$(SolutionDir)Employee.DataAccess\bin\$(ConfigurationName)\*" "$(ProjectDir)bin\"
+XCOPY /Y /R "$(SolutionDir)Employee.Mapping\bin\$(ConfigurationName)\*" "$(ProjectDir)bin\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -8,7 +8,7 @@ namespace Employee.BusinessLogic.Abstractions
     {
         IEnumerable<Model.Employee> GetAllEmployees(); // BUG: Should be ICollection instead of IEnumerable
 
-        void CreateEmployee(Model.Employee employee);
+        Model.Employee CreateEmployee(Model.Employee employee);
 
         IEnumerable<Department> GetAllDepartments(); // BUG: Should be ICollection instead of IEnumerable
 

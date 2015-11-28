@@ -16,6 +16,7 @@ namespace Employee.Service
 
             builder.RegisterAssemblyModules(Assembly.Load("Employee.DataAccess"));
             builder.RegisterAssemblyModules(Assembly.Load("Employee.BusinessLogic"));
+            builder.RegisterAssemblyModules(Assembly.Load("Employee.Mapping"));
 
             // Set the dependency resolver.
             var container = builder.Build();

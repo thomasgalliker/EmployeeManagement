@@ -124,6 +124,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +160,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -167,16 +169,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Employee.DataAccess.EmployeeContext.mdf" />
-    <Content Include="App_Data\Employee.DataAccess.EmployeeContext_log.ldf">
-      <DependentUpon>Employee.DataAccess.EmployeeContext.mdf</DependentUpon>
-    </Content>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -201,6 +200,8 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\knockout-3.4.0.debug.js" />
+    <Content Include="Scripts\knockout-3.4.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -226,9 +227,17 @@
       <Project>{152350ed-4f0c-4870-9f6d-09d7866916da}</Project>
       <Name>Employee.BusinessLogic.Abstractions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Employee.Mapping.Abstraction\Employee.Mapping.Abstraction.csproj">
+      <Project>{63b2ae1f-5f2b-41a9-86d1-51abfdf73cec}</Project>
+      <Name>Employee.Mapping.Abstraction</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Employee.Model\Employee.Model.csproj">
       <Project>{f351b308-3b22-4949-9ac0-507c8b0c3bd5}</Project>
       <Name>Employee.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Employee.Service.Contracts\Employee.Service.Contracts.csproj">
+      <Project>{3af1464a-998f-4310-8887-439d16804a93}</Project>
+      <Name>Employee.Service.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -268,7 +277,8 @@
   </ProjectExtensions>
   <PropertyGroup>
     <PostBuildEvent>XCOPY /Y /R "$(SolutionDir)Employee.BusinessLogic\bin\$(ConfigurationName)\*" "$(ProjectDir)bin\"
-XCOPY /Y /R "$(SolutionDir)Employee.DataAccess\bin\$(ConfigurationName)\*" "$(ProjectDir)bin\"</PostBuildEvent>
+XCOPY /Y /R "$(SolutionDir)Employee.DataAccess\bin\$(ConfigurationName)\*" "$(ProjectDir)bin\"
+XCOPY /Y /R "$(SolutionDir)Employee.Mapping\bin\$(ConfigurationName)\*" "$(ProjectDir)bin\"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

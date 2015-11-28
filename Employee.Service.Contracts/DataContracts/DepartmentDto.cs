@@ -7,6 +7,9 @@ namespace Employee.Service.Contracts.DataContracts
     public class DepartmentDto
     {
         [DataMember]
+        public int Id { get; set; }
+
+        [DataMember]
         public string Name { get; set; }
 
         [DataMember]

@@ -28,6 +28,7 @@ namespace Employee.WebApi
 
             builder.RegisterAssemblyModules(Assembly.Load("Employee.DataAccess"));
             builder.RegisterAssemblyModules(Assembly.Load("Employee.BusinessLogic"));
+            builder.RegisterAssemblyModules(Assembly.Load("Employee.Mapping"));
 
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 

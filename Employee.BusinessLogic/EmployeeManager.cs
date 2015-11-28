@@ -37,12 +37,14 @@ namespace Employee.BusinessLogic
             return this.employeeRepository.GetAll();
         }
 
-        public void CreateEmployee(Model.Employee employee)
+        public Model.Employee CreateEmployee(Model.Employee employee)
         {
             Guard.ArgumentNotNull(() => employee);
 
             this.employeeRepository.Add(employee);
             this.unitOfWork.Commit();
+
+            return employee;
         }
 
         public IEnumerable<Department> GetAllDepartments()

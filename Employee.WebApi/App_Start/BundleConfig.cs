@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace Employee.WebApi
 {
@@ -23,6 +22,10 @@ namespace Employee.WebApi
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                      "~/Scripts/knockout-3.4.0.js",
+                      "~/Scripts/app.js"));
         }
     }
 }
