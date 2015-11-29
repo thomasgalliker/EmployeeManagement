@@ -57,12 +57,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utils\DatabaseExtensions.cs" />
     <Compile Include="Core\UnitOfWork.cs" />
     <Compile Include="Core\DbContextBase.cs" />
     <Compile Include="Core\IDbContext.cs" />
     <Compile Include="IEmployeeContext.cs" />
-    <Compile Include="Mapping\EmployeeConfiguration.cs" />
-    <Compile Include="Mapping\DepartmentConfiguration.cs" />
+    <Compile Include="Mapping\EmployeeDbMigrationConfiguration.cs" />
+    <Compile Include="Mapping\EmployeeEntityConfiguration.cs" />
+    <Compile Include="Mapping\DepartmentEntityConfiguration.cs" />
     <Compile Include="Configuration\DataAccessModule.cs" />
     <Compile Include="EmployeeContext.cs" />
     <Compile Include="Mapping\EmployeeDbConfiguration.cs" />
