@@ -15,6 +15,8 @@ Furthermore, the aim of this project was to show the interplay of the mentioned 
 - User management, authentication and authorization
 - Web client
 - Cross-platform mobile clients
+- Localization
+- Input validation
 
 ### Helpful links
 
