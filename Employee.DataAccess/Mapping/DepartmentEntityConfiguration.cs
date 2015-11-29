@@ -2,9 +2,9 @@
 
 namespace Employee.DataAccess.Mapping
 {
-    public class DepartmentConfiguration : EntityTypeConfiguration<Model.Department>
+    public class DepartmentEntityConfiguration : EntityTypeConfiguration<Model.Department>
     {
-        public DepartmentConfiguration()
+        public DepartmentEntityConfiguration()
         {
             this.HasKey(d => new {d.Id, d.Name});
             this.Property(d => d.Name).IsRequired();
@@ -13,7 +13,7 @@ namespace Employee.DataAccess.Mapping
             this.HasMany(d => d.Employees)
                 .WithOptional(e => e.Department);
 
-            this.HasRequired(d => d.Leader);
+            this.HasOptional(d => d.Leader);
         }
     }
 }

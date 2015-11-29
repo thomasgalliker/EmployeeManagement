@@ -3,9 +3,9 @@
 
 namespace Employee.DataAccess.Mapping
 {
-    public class EmployeeConfiguration : EntityTypeConfiguration<Model.Employee>
+    public class EmployeeEntityConfiguration : EntityTypeConfiguration<Model.Employee>
     {
-        public EmployeeConfiguration()
+        public EmployeeEntityConfiguration()
         {
             this.HasKey(d => d.Id);
 
@@ -19,8 +19,8 @@ namespace Employee.DataAccess.Mapping
 
             this.Property(e => e.RowVersion).IsConcurrencyToken();
 
-            this.HasOptional(e => e.Department)
-                .WithMany(d => d.Employees);
+            ////this.HasOptional(e => e.Department)
+            ////    .WithMany(d => d.Employees);
         }
     }
 }

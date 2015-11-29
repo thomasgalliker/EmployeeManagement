@@ -17,5 +17,8 @@ namespace Employee.Service.Contracts.DataContracts
 
         [DataMember]
         public DateTime Birthdate { get; set; }
+
+        [DataMember]
+        public DepartmentDto Department { get; set; }
     }
 }

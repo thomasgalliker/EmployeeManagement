@@ -34,6 +34,19 @@ namespace Employee.DataAccess.Repositories
             }
         }
 
+        public IQueryable<T> Get(params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = this.DbSet;
+            if (includes != null)
+            {
+                foreach (var include in includes)
+                {
+                    query = query.Include(include);
+                }
+            }
+            return query;
+        }
+
         public virtual IEnumerable<T> GetAll()
         {
             return this.DbSet.AsEnumerable<T>();

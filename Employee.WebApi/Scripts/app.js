@@ -7,7 +7,8 @@
     self.newEmployee = {
         FirstName: ko.observable(),
         LastName: ko.observable(),
-        Birthdate: ko.observable()
+        Birthdate: ko.observable(),
+        Department: ko.observable()
     }
 
     var employeeUri = '/api/employee/';
@@ -49,7 +50,8 @@
         var employee = {
             FirstName: self.newEmployee.FirstName(),
             LastName: self.newEmployee.LastName(),
-            Birthdate: self.newEmployee.Birthdate()
+            Birthdate: self.newEmployee.Birthdate(),
+            Department: self.newEmployee.Department()
         };
 
         ajaxHelper(employeeUri, 'POST', employee).done(function (item) {

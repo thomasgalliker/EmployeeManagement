@@ -1,7 +1,9 @@
 ﻿using System.Data.Entity;
+using System.Diagnostics;
 
 using Employee.DataAccess.Core;
 using Employee.DataAccess.Mapping;
+using Employee.DataAccess.Utils;
 
 namespace Employee.DataAccess
 {
@@ -12,8 +14,8 @@ namespace Employee.DataAccess
         {
             if (initializer == null)
             {
-                Database.SetInitializer(new CreateDatabaseIfNotExists<EmployeeContext>()); //Default one
-                //Database.SetInitializer<EmployeeContext>(new DropCreateDatabaseIfModelChanges<EmployeeContext>()); //Drop database if changes detected
+                //Database.SetInitializer(new CreateDatabaseIfNotExists<EmployeeContext>()); //Default one
+                Database.SetInitializer<EmployeeContext>(new DropCreateDatabaseIfModelChanges<EmployeeContext>()); //Drop database if changes detected
                 //Database.SetInitializer<EmployeeContext>(new DropCreateDatabaseAlways<EmployeeContext>()); //Drop database every times
                 //Database.SetInitializer<YourContext>(new CustomInitializer<YourContext>()); //Custom if model changed and seed values
                 //Database.SetInitializer<EmployeeContext>(null); //Nothing is done
@@ -22,6 +24,8 @@ namespace Employee.DataAccess
             {
                 Database.SetInitializer(initializer);
             }
+
+            this.Database.Log = s => Debug.WriteLine(s);
         }
 
         public EmployeeContext(string databaseName)
@@ -31,8 +35,9 @@ namespace Employee.DataAccess
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new EmployeeConfiguration());
-            modelBuilder.Configurations.Add(new DepartmentConfiguration());
+            this.Database.KillConnectionsToTheDatabase();
+            modelBuilder.Configurations.Add(new EmployeeEntityConfiguration());
+            modelBuilder.Configurations.Add(new DepartmentEntityConfiguration());
         }
     }
 }

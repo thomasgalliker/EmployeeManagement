@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.Linq;
 
 using Employee.BusinessLogic.Abstractions;
 using Employee.DataAccess.Abstractions;
@@ -32,9 +33,9 @@ namespace Employee.BusinessLogic
             this.unitOfWork.RegisterContext(departmentRepository.Context); // BUG: They both share the same context; no need to register 2x
         }
 
-        public IEnumerable<Model.Employee> GetAllEmployees()
+        public ICollection<Model.Employee> GetAllEmployees()
         {
-            return this.employeeRepository.GetAll();
+            return this.employeeRepository.Get(x => x.Department).ToList();
         }
 
         public Model.Employee CreateEmployee(Model.Employee employee)
@@ -47,9 +48,9 @@ namespace Employee.BusinessLogic
             return employee;
         }
 
-        public IEnumerable<Department> GetAllDepartments()
+        public ICollection<Department> GetAllDepartments()
         {
-            return this.departmentRepository.GetAll();
+            return this.departmentRepository.GetAll().ToList();
         }
 
         public void CreateDepartment(Department department)
