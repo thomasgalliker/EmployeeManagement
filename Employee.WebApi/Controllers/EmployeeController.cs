@@ -48,13 +48,13 @@ namespace Employee.WebApi.Controllers
         [ResponseType(typeof(EmployeeDto))]
         public IHttpActionResult Get(int id)
         {
-            var employeeDto = this.employeeManager.GetAllEmployees().SingleOrDefault(e => e.Id == id);
-            if (employeeDto == null)
+            var employee = this.employeeManager.GetAllEmployees().SingleOrDefault(e => e.Id == id);
+            if (employee == null)
             {
                 return this.NotFound();
             }
 
-            return this.Ok(this.employeeToDtoMapper.Map(employeeDto));
+            return this.Ok(this.employeeToDtoMapper.Map(employee));
         }
 
         // POST api/employee
