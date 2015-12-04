@@ -36,6 +36,10 @@ namespace Employee.WebApi
             var resolver = new AutofacWebApiDependencyResolver(container);
             config.DependencyResolver = resolver;
 
+            // In order to avoid recursive json serialization:
+            var json = config.Formatters.JsonFormatter;
+            json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
         }
     }
 }
