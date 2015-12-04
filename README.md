@@ -54,5 +54,9 @@ Using MVVMLight in a WPF application
 
 http://www.dotnetcurry.com/wpf/1037/mvvm-light-wpf-model-view-viewmodel
 
+Configuring Relationships with the Fluent API
+
+https://msdn.microsoft.com/en-us/data/jj591620.aspx
+
 ### License 
 Copyright &copy; 2015 [Thomas Galliker](https://ch.linkedin.com/in/thomasgalliker). Free for non-commercial use. For commercial use please contact the author. 
