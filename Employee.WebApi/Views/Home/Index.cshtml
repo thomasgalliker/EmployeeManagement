@@ -35,7 +35,15 @@
                 <tr><td>First name</td><td data-bind="text: detail().FirstName"></td></tr>
                 <tr><td>Last name</td><td data-bind="text: detail().LastName"></td></tr>
                 <tr><td>Birthdate</td><td data-bind="text: detail().Birthdate"></td></tr>
-                <tr><td>Department</td><td data-bind="text: detail().Department"></td></tr>
+                <tr>
+                    <td>Department</td>
+                    <td>
+                        <div>
+                            <span data-bind="text: detail().Department.Name"></span>
+                            <span data-bind="visible: true">(Leader: <span data-bind="text: detail().Department.Leader.FirstName"></span>)</span>
+                        </div>
+                    </td>
+                </tr>
             </table>
         </div>
     </div>
@@ -46,7 +54,6 @@
             <div class="panel-heading">
                 <h2 class="panel-title">Add Employee</h2>
             </div>
-
             <div class="panel-body">
                 <form class="form-horizontal" data-bind="submit: addEmployee">
 

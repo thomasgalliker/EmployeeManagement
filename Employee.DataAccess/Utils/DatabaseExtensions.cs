@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.Entity;
 
 namespace Employee.DataAccess.Utils
@@ -22,16 +23,24 @@ namespace Employee.DataAccess.Utils
              exec (@kill);";
 
             var sql = string.Format(sqlFormat, databaseName);
-            using (var command = database.Connection.CreateCommand())
+
+            try
             {
-                command.CommandText = sql;
-                command.CommandType = CommandType.Text;
+                using (var command = database.Connection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    command.CommandType = CommandType.Text;
 
-                command.Connection.Open();
+                    command.Connection.Open();
 
-                command.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
 
-                command.Connection.Close();
+                    command.Connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
         }
     }

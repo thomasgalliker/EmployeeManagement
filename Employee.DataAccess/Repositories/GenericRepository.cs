@@ -73,6 +73,13 @@ namespace Employee.DataAccess.Repositories
            this.Context.Edit(entity);
         }
 
+        public virtual void LoadReferenced<TEntity, TProperty>(TEntity entity, Expression<Func<TEntity, TProperty>> navigationProperty)
+            where TEntity : class
+            where TProperty : class
+        {
+            this.Context.LoadReferenced(entity, navigationProperty);
+        }
+
         public virtual void Save()
         {
             this.Context.SaveChanges();

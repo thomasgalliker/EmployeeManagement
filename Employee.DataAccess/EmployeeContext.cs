@@ -12,6 +12,8 @@ namespace Employee.DataAccess
     {
         public EmployeeContext(IDatabaseInitializer<EmployeeContext> initializer = null)
         {
+            this.Configuration.LazyLoadingEnabled = false;
+
             if (initializer == null)
             {
                 //Database.SetInitializer(new CreateDatabaseIfNotExists<EmployeeContext>()); //Default one

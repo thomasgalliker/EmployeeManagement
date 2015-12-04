@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
+using System.Linq.Expressions;
 
 namespace Employee.DataAccess.Core
 {
@@ -12,6 +14,13 @@ namespace Employee.DataAccess.Core
         public void Edit<TEntity>(TEntity entity) where TEntity : class
         {
             this.Entry(entity).State = EntityState.Modified;
+        }
+
+        public void LoadReferenced<TEntity, TProperty>(TEntity entity, Expression<Func<TEntity, TProperty>> navigationProperty) 
+            where TEntity : class
+            where TProperty : class
+        {
+            this.Entry(entity).Reference(navigationProperty).Load();
         }
     }
 }

@@ -43,7 +43,10 @@ namespace Employee.BusinessLogic
             Guard.ArgumentNotNull(() => employee);
 
             this.employeeRepository.Add(employee);
+
             this.unitOfWork.Commit();
+
+            this.employeeRepository.LoadReferenced(employee, e => e.Department);
 
             return employee;
         }

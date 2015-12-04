@@ -45,7 +45,6 @@
         });
     }
 
-
     self.addEmployee = function (formElement) {
         var employee = {
             FirstName: self.newEmployee.FirstName(),

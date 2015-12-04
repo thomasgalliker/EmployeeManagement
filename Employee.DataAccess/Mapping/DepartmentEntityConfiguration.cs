@@ -6,12 +6,17 @@ namespace Employee.DataAccess.Mapping
     {
         public DepartmentEntityConfiguration()
         {
-            this.HasKey(d => new {d.Id, d.Name});
+            this.HasKey(d => d.Id);
+
             this.Property(d => d.Name).IsRequired();
             this.Property(d => d.Name).HasMaxLength(20);
 
-            this.HasMany(d => d.Employees)
-                .WithOptional(e => e.Department);
+            ////this.HasMany(d => d.Employees)
+            ////    .WithOptional(e => e.Department);
+
+            this.HasRequired(d => d.Leader)
+                .WithMany()
+                .HasForeignKey(d => d.LeaderId);
 
             this.HasOptional(d => d.Leader);
         }

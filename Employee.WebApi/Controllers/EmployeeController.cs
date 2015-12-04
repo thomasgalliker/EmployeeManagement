@@ -54,7 +54,9 @@ namespace Employee.WebApi.Controllers
                 return this.NotFound();
             }
 
-            return this.Ok(this.employeeToDtoMapper.Map(employee));
+            var employeeDto = this.employeeToDtoMapper.Map(employee);
+
+            return this.Ok(employeeDto);
         }
 
         // POST api/employee
@@ -67,7 +69,7 @@ namespace Employee.WebApi.Controllers
             }
 
             var employee = this.dtoToEmployeeMapper.Map(employeeDto);
-
+            
             var employeeWithId = this.employeeManager.CreateEmployee(employee);
             var employeeDtoWithId = this.employeeToDtoMapper.Map(employeeWithId);
 

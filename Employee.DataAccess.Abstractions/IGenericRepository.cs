@@ -19,7 +19,9 @@ namespace Employee.DataAccess.Abstractions
 
         T Delete(T entity);
 
-        void Edit(T entity);
+        void LoadReferenced<TEntity, TProperty>(TEntity entity, Expression<Func<TEntity, TProperty>> navigationProperty)
+            where TEntity : class
+            where TProperty : class;
 
         void Save();
     }

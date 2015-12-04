@@ -13,6 +13,8 @@ namespace Employee.Model
 
         public string Name { get; set; }
 
+        public int? LeaderId { get; set; }
+
         public virtual Employee Leader { get; set; }
 
         public virtual ICollection<Employee> Employees { get; set; }
