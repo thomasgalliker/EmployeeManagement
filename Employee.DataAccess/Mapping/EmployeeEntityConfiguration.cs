@@ -19,8 +19,9 @@ namespace Employee.DataAccess.Mapping
 
             this.Property(e => e.RowVersion).IsConcurrencyToken();
 
-            ////this.HasOptional(e => e.Department)
-            ////    .WithMany(d => d.Employees);
+            this.HasRequired(e => e.Department)
+                .WithMany(d => d.Employees)
+                .HasForeignKey(e => e.DepartmentId);
         }
     }
 }
