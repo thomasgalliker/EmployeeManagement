@@ -23,7 +23,8 @@ namespace Employee.Mapping
                 .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
                 .ForMember(dest => dest.Birthdate, opt => opt.MapFrom(src => src.Birthdate))
-                .ForMember(dest => dest.Department, opt => opt.MapFrom(src => src.Department))
+                .ForMember(dest => dest.DepartmentId, opt => opt.MapFrom(src => src.Department.Id))
+                .ForMember(dest => dest.Department, opt => opt.Ignore())
                 .ForMember(dest => dest.RowVersion, opt => opt.Ignore());
         }
 
