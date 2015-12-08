@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 
 using Employee.BusinessLogic.Abstractions;
 using Employee.Mapping.Abstraction;
 using Employee.Service.Contracts.DataContracts;
+using Employee.WebApi.ExceptionHandling;
 
 using Guards;
 
@@ -31,12 +35,26 @@ namespace Employee.WebApi.Controllers
             this.employeeToDtoMapper = employeeToDtoMapper;
         }
 
-        // GET api/employee
-        public IEnumerable<EmployeeDto> Get()
+        // GET api/employee/all
+        [ActionName("all")]
+        [HttpGet]
+        [ResponseType(typeof(IEnumerable<EmployeeDto>))]
+        public IHttpActionResult Get()
         {
             var allEmployees = this.employeeManager.GetAllEmployees();
 
-            return this.ConvertToDto(allEmployees);
+            var employeeDtos = this.ConvertToDto(allEmployees);
+
+            return this.Ok(employeeDtos);
+        }
+
+        // GET api/employee/provokeError
+        [Route("api/employee/provokeError")]
+        [ActionName("provokeError")]
+        [HttpGet]
+        public IHttpActionResult ProvokeError()
+        {
+            throw new UserProvokedException("An error has been provoked by the client!");
         }
 
         private IEnumerable<EmployeeDto> ConvertToDto(IEnumerable<Model.Employee> allEmployees)
@@ -51,7 +69,12 @@ namespace Employee.WebApi.Controllers
             var employee = this.employeeManager.GetAllEmployees().SingleOrDefault(e => e.Id == id);
             if (employee == null)
             {
-                return this.NotFound();
+                var httpResponseMessage = new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent(string.Format("Could not find employee with ID {0}.", id)),
+                    ReasonPhrase = "Employee not found."
+                };
+                throw new HttpResponseException(httpResponseMessage);
             }
 
             var employeeDto = this.employeeToDtoMapper.Map(employee);

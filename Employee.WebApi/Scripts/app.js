@@ -23,12 +23,12 @@
             contentType: 'application/json',
             data: data ? JSON.stringify(data) : null
         }).fail(function (jqXHR, textStatus, errorThrown) {
-            self.error(errorThrown);
+            self.error(jqXHR.responseText);
         });
     }
 
     function getAllEmployees() {
-        ajaxHelper(employeeUri, 'GET').done(function (data) {
+    ajaxHelper(employeeUri, 'GET').done(function (data) {
             self.employees(data);
         });
     }
@@ -56,6 +56,14 @@
         ajaxHelper(employeeUri, 'POST', employee).done(function (item) {
             self.employees.push(item);
         });
+    }
+
+    self.callErrorMethod = function () {
+        ajaxHelper(employeeUri +"provokeError", 'GET');
+    }
+
+    self.callNonExistingMethod = function () {
+        ajaxHelper("non-existing-method", 'GET');
     }
 
     // Fetch the initial data.

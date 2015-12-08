@@ -60,5 +60,17 @@ Configuring Relationships with the Fluent API
 
 https://msdn.microsoft.com/en-us/data/jj591620.aspx
 
+ASP.NET Web API Exception Handling
+
+http://weblogs.asp.net/fredriknormen/asp-net-web-api-exception-handling
+
+Mvc4CustomErrorPage 
+
+https://github.com/13daysaweek/Mvc4CustomErrorPage/tree/master/ThirteenDaysAWeek.Mvc4CustomErrorPage.Web/Views
+
+Exception Handling in WebAPI
+
+http://www.codeproject.com/Articles/733512/Exception-Handling-in-WebAPI
+
 ### License 
 Copyright &copy; 2015 [Thomas Galliker](https://ch.linkedin.com/in/thomasgalliker). Free for non-commercial use. For commercial use please contact the author. 
