@@ -54,7 +54,17 @@ namespace Employee.WebApi.Controllers
         [HttpGet]
         public IHttpActionResult ProvokeError()
         {
-            throw new UserProvokedException("An error has been provoked by the client!");
+            // Here we simulate a known exception being thrown...
+            throw new UserProvokedException("A known error has been provoked by the client!");
+        }
+
+        [Route("api/employee/provokeUnknownError")]
+        [ActionName("provokeUnknownError")]
+        [HttpGet]
+        public IHttpActionResult ProvokeUnknownError()
+        {
+            // Here we simulate an unknown exception being thrown...
+            throw new InvalidOperationException("An unknown error has been provoked by the client!");
         }
 
         private IEnumerable<EmployeeDto> ConvertToDto(IEnumerable<Model.Employee> allEmployees)

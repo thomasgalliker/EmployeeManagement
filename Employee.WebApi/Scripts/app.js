@@ -62,6 +62,10 @@
         ajaxHelper(employeeUri +"provokeError", 'GET');
     }
 
+    self.callUnknownErrorMethod = function() {
+        ajaxHelper(employeeUri + "provokeUnknownError", 'GET');
+    }
+
     self.callNonExistingMethod = function () {
         ajaxHelper("non-existing-method", 'GET');
     }
