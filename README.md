@@ -7,13 +7,12 @@ It contains a collection of patterns and services which are used in enterprise a
 - EntityFramework code-first database context
 - UnitOfWork and repository pattern
 - Restful WCF service with JSON
-- Multi-platform client access, using DTOs to exchange information with the backend
+- Diverse client technologies. Using DTOs to exchange information with the backend and ViewModels (MVVM) to bind model data to views.
 
 Furthermore, the aim of this project was to show the interplay of the mentioned technologies, principles and practices.
 
 ### Missing points
-- User management, authentication and authorization
-- Web client
+- Authentication and authorization
 - Cross-platform mobile clients
 - Localization
 - Input validation
