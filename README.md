@@ -77,6 +77,11 @@ http://www.nullskull.com/a/10476775/xamarin-cross-platform-application-consuming
 
 http://nullskull.com/a/10476786/xamarin-cross-platform-application-consuming-wcf--part-2.aspx
 
+Custom WCF message formatters (NewtonsoftJsonBehavior) 
+
+https://github.com/carlosfigueira/WCFSamples/tree/master/MessageFormatter/MessageFormatter/JsonNetMessageFormatter
+
+http://stackoverflow.com/questions/8082231/custom-behavior-wont-register-in-my-web-config
 
 ### License 
 Copyright &copy; 2015 [Thomas Galliker](https://ch.linkedin.com/in/thomasgalliker). Free for non-commercial use. For commercial use please contact the author. 

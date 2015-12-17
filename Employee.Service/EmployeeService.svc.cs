@@ -19,17 +19,18 @@ namespace Employee.Service
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class EmployeeService : IEmployeeService
     {
-        private IMapper<Model.Employee, EmployeeDto> employeeToDtoMapper;
+        private readonly IMapper<Model.Employee, EmployeeDto> employeeToDtoMapper;
         private readonly IMapper<EmployeeDto, Model.Employee> dtoToEmployeeMapper;
 
         public EmployeeService(
-            IMapper<Model.Employee, EmployeeDto> employeeToDtoMapper, 
+            IMapper<Model.Employee, EmployeeDto> employeeToDtoMapper,
             IMapper<EmployeeDto, Model.Employee> dtoToEmployeeMapper)
         {
             this.employeeToDtoMapper = employeeToDtoMapper;
             this.dtoToEmployeeMapper = dtoToEmployeeMapper;
         }
 
+        [WebInvoke(Method="POST")]
         public void CreateEmployee(EmployeeDto employeeDto)
         {
             try
@@ -48,7 +49,8 @@ namespace Employee.Service
             }
         }
 
-        [WebGet(UriTemplate = "/getallemployees", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        //[WebGet(UriTemplate = "/getallemployees")] // UriTemplates are not supported in our custom message formatter
+        [WebGet]
         public IEnumerable<EmployeeDto> GetAllEmployees()
         {
             try
