@@ -71,5 +71,12 @@ Exception Handling in WebAPI
 
 http://www.codeproject.com/Articles/733512/Exception-Handling-in-WebAPI
 
+Consuming WCF Services in Xamarin
+
+http://www.nullskull.com/a/10476775/xamarin-cross-platform-application-consuming-wcf--part-1.aspx
+
+http://nullskull.com/a/10476786/xamarin-cross-platform-application-consuming-wcf--part-2.aspx
+
+
 ### License 
 Copyright &copy; 2015 [Thomas Galliker](https://ch.linkedin.com/in/thomasgalliker). Free for non-commercial use. For commercial use please contact the author. 
