@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 
 using CrossPlatformLibrary.Extensions;
@@ -35,6 +36,7 @@ namespace Employee.Client.Shared.ViewModel
             {
                 return this.getAllEmployeesCommand ?? new RelayCommand(async () =>
                 {
+                    await this.employeeServiceClient.CreateEmployee(new EmployeeDto{FirstName = "hulululu", LastName = "balblbl", Birthdate = DateTime.Now, Department = new DepartmentDto{Id = 1}});
                     var employeeDtos = await this.employeeServiceClient.GetAllEmployees();
                     this.Employees.Clear();
                     employeeDtos.ForEach(this.Employees.Add);

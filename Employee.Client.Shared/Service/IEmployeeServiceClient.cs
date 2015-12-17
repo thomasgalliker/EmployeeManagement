@@ -9,5 +9,7 @@ namespace Employee.Client.Shared.Service
     public interface IEmployeeServiceClient
     {
         Task<IList<EmployeeDto>> GetAllEmployees();
+
+        Task CreateEmployee(EmployeeDto employee);
     }
 }

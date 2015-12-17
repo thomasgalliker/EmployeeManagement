@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading.Tasks;
 
 using CrossPlatformLibrary.Tracing;
@@ -34,22 +36,33 @@ namespace Employee.Client.Shared.Service
                   .Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<IList<EmployeeDto>> GetAllEmployees()
+        public Task<IList<EmployeeDto>> GetAllEmployees()
         {
-            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "getallemployees");
-
             // http://stackoverflow.com/questions/10679214/how-do-you-set-the-content-type-header-for-an-httpclient-request
             ////HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "relativeAddress");
             ////request.Content = new StringContent("{\"name\":\"John Doe\",\"age\":33}",
             ////                                    Encoding.UTF8,
             ////                                    "application/json");
 
-            var response = await this.HandleHttpRequestAsync<IList<EmployeeDto>>(httpRequestMessage);
-            return response ?? Enumerable.Empty<EmployeeDto>().ToList();
+            var response = this.HandleHttpRequestAsync<IList<EmployeeDto>>(HttpMethod.Get);
+            return response;
         }
 
-        private async Task<T> HandleHttpRequestAsync<T>(HttpRequestMessage httpRequestMessage)
+        public Task CreateEmployee(EmployeeDto employee)
         {
+            return this.HandleHttpRequestAsync<IList<EmployeeDto>>(HttpMethod.Post, employee);
+        }
+
+        private async Task<T> HandleHttpRequestAsync<T>(HttpMethod httpMethod, object parameter = null, [CallerMemberName] string methodName = "")
+        {
+            var httpRequestMessage = new HttpRequestMessage(httpMethod, methodName);
+
+            if (parameter != null)
+            {
+                var result = JsonConvert.SerializeObject(parameter);
+                httpRequestMessage.Content = new StringContent(result, Encoding.UTF8, "application/json");
+            }
+           
             var httpResponseMessage = await this.client.SendAsync(httpRequestMessage);
             if (httpResponseMessage.IsSuccessStatusCode)
             {
