@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Employee.Model
 {
+    [DebuggerDisplay("Id={Id}, Name={Name}")]
     public class Department
     {
         public Department()

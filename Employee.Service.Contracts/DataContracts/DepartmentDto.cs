@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.Serialization;
 
 namespace Employee.Service.Contracts.DataContracts
 {
+    [DebuggerDisplay("Id={Id}, Name={Name}")]
     [DataContract]
     public class DepartmentDto
     {

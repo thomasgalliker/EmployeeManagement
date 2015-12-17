@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace Employee.Model
 {
+    [DebuggerDisplay("Id={Id}, FirstName={FirstName}, LastName={LastName}")]
     public class Employee
     {
         public int Id { get; set; }
