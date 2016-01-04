@@ -4,11 +4,13 @@
         xmlns:views="clr-namespace:Employee.Client.WPF.Views"
         ResizeMode="NoResize"
         Title="MainWindow"
-          DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+        DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
     <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <views:EmployeeList Grid.Column="0"/>
+        <views:EmployeeDetail Grid.Column="1"/>
     </Grid>
 </Window>

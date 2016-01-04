@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="Employee.Client.WPF.Views.EmployeeDetail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="400"
+             DataContext="{Binding Main, Source={StaticResource Locator}}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock TextWrapping="Wrap"
+                   TextAlignment="Left" 
+                   Text="Details" 
+                   FontWeight="Bold" 
+                   FontSize="30"
+                   Grid.Row="0"/>
+        
+        <Label Grid.Row="1">ID:</Label>
+        <Label Grid.Row="2">Last name:</Label>
+        <Label Grid.Row="3">First name:</Label>
+        <Label Grid.Row="4">Birth date:</Label>
+        <Label Grid.Row="5">Department:</Label>
+
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding SelectedEmployeeDto.Id, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding SelectedEmployeeDto.LastName, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding SelectedEmployeeDto.FirstName, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding SelectedEmployeeDto.Birthdate, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding SelectedEmployeeDto.Department.Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+    </Grid>
+</UserControl>
