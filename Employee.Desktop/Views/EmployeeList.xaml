@@ -9,7 +9,7 @@
         mc:Ignorable="d ignore"
         d:DesignHeight="600"
         d:DesignWidth="800"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
+        DataContext="{Binding}">
 
     <Grid>
         <Grid.RowDefinitions>
