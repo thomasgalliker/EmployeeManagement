@@ -72,6 +72,7 @@
     <Compile Include="Repositories\DepartmentRepository.cs" />
     <Compile Include="Repositories\EmployeeRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Utils\EmployeeContextInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -86,6 +87,12 @@
       <Project>{f351b308-3b22-4949-9ac0-507c8b0c3bd5}</Project>
       <Name>Employee.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Seed\Employees.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Seed\Departments.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

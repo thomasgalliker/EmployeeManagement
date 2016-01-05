@@ -9,7 +9,7 @@ namespace Employee.DataAccess.Mapping
             this.HasKey(d => d.Id);
 
             this.Property(d => d.Name).IsRequired();
-            this.Property(d => d.Name).HasMaxLength(20);
+            this.Property(d => d.Name).HasMaxLength(255);
 
             ////this.HasMany(d => d.Employees)
             ////    .WithOptional(e => e.Department);
