@@ -9,7 +9,7 @@
         mc:Ignorable="d ignore"
         d:DesignHeight="600"
         d:DesignWidth="800"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
+        DataContext="{Binding}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -30,15 +30,15 @@
                  Command="{Binding GetAllEmployeesCommand}"/>
         <DataGrid Grid.Row="2" ItemsSource="{Binding Employees}" 
                  ColumnWidth="*"  Margin="0,10,0,28" RenderTransformOrigin="0.5,0.5"
-                   IsReadOnly="True" >
-            <i:Interaction.Triggers>
+                   IsReadOnly="True" SelectedItem="{Binding SelectedEmployeeDto, Mode=TwoWay}" SelectionMode="Single">
+            <!--<i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <mvvm:EventToCommand 
                     Command="{Binding  SendEmployeeCommand, Mode=OneWay}"
                     CommandParameter="{Binding ElementName=dgemp,Path=SelectedItem}"    
                      />
                 </i:EventTrigger>
-            </i:Interaction.Triggers>
+            </i:Interaction.Triggers>-->
         </DataGrid>
         <TextBlock HorizontalAlignment="Left" Margin="10,7,0,0" Grid.Row="1" 
                    TextWrapping="Wrap" Text="Search:" VerticalAlignment="Top" 
