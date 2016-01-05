@@ -65,9 +65,7 @@ namespace Employee.DataAccess.Utils
                 }
             }
 
-            context.SaveChanges();
-
-            ////base.Seed(context);
+            base.Seed(context);
         }
     }
    
