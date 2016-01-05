@@ -16,6 +16,7 @@ Furthermore, the aim of this project was to show the interplay of the mentioned 
 - Cross-platform mobile clients
 - Localization
 - Input validation
+- Filtering, grouping, sorting, paging of list items
 
 ### Helpful links
 
