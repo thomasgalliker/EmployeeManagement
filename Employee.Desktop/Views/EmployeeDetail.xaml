@@ -2,10 +2,16 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:Employee.Client.WPF.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="400"
              DataContext="{Binding}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:DateTimeConverter x:Key="DateTimeConverter" Format="d" MinValueString="-"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -38,7 +44,7 @@
         <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding SelectedEmployeeDto.Id, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding SelectedEmployeeDto.LastName, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding SelectedEmployeeDto.FirstName, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-        <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding SelectedEmployeeDto.Birthdate, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding SelectedEmployeeDto.Birthdate, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DateTimeConverter}}"></TextBlock>
         <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding SelectedEmployeeDto.Department.Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
     </Grid>
 </UserControl>
