@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
-using CrossPlatformLibrary.Extensions;
+
 using Employee.Client.Shared.Service;
 using Employee.Service.Contracts.DataContracts;
+
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
@@ -19,196 +16,178 @@ namespace Employee.Client.Shared.ViewModel
         //Private fields
         private readonly IEmployeeServiceClient employeeServiceClient;
 
-        private DepartmentDto selecteDepartmentDto;
-        private EmployeeDto originalEmployeeDto;
+        private DepartmentDto selecteDepartment;
         private bool buttonVisibility;
         private int id;
         private string firstName;
         private string lastName;
         private DateTime birthdate;
         private int departmentId;
-        private RelayCommand saveEmployeeDtoRelayCommand;
-        private RelayCommand cancelEmployeeEditingRelayCommand;
-        private RelayCommand employeeDtoValueChangedCommand;
-        private RelayCommand getAllDepartmentRelayCommand;
-        private bool isFirstComboboxChange;
+        private RelayCommand saveEmployeeCommand;
+        private RelayCommand cancelChangesCommand;
+        private RelayCommand editEmployeeCommand;
+        private readonly EditMode editMode;
 
-        //Public properties
-        public ObservableCollection<DepartmentDto> Departments { get; private set; }
-        public DepartmentDto SelecteDepartmentDto
-        {
-            get { return selecteDepartmentDto; }
-            set
-            {
-                selecteDepartmentDto = value;
-                RaisePropertyChanged(() => this.SelecteDepartmentDto);
-            }
-        }
-        public EmployeeDto OriginalEmployeeDto
-        {
-            get { return originalEmployeeDto; }
-        }
-        public bool ButtonVisibility
-        {
-            get { return buttonVisibility; }
-            set
-            {
-                buttonVisibility = value;
-                RaisePropertyChanged(() => this.ButtonVisibility);
-            }
-        }
-        public int Id
-        {
-            get { return id; }
-            set
-            {
-                id = value;
-                RaisePropertyChanged(() => this.Id);
-            }
-        }
-        public string FirstName
-        {
-            get { return firstName; }
-            set
-            {
-                firstName = value;
-                RaisePropertyChanged(() => this.FirstName);
-            }
-        }
-        public string LastName
-        {
-            get { return lastName; }
-            set
-            {
-                lastName = value;
-                RaisePropertyChanged(() => this.LastName);
-            }
-        }
-        public DateTime Birthdate
-        {
-            get { return birthdate; }
-            set
-            {
-                birthdate = value;
-                RaisePropertyChanged(() => this.Birthdate);
-            }
-        }
-        public int DepartmentId
-        {
-            get { return departmentId; }
-            set
-            {
-                departmentId = value;
-                if (Departments != null)
-                {
-                    SelecteDepartmentDto = this.Departments.SingleOrDefault(d => d.Id == this.DepartmentId);
-                }
-                RaisePropertyChanged(() => this.DepartmentId);
-            }
-        }
-        
-        
-
-        //Constructors
-        public EmployeeDetailViewModel(IEmployeeServiceClient employeeServiceClient, EmployeeDto employeeDto)
+        public EmployeeDetailViewModel(IEmployeeServiceClient employeeServiceClient, int employeeId, EditMode editMode)
         {
             this.employeeServiceClient = employeeServiceClient;
-
-            this.Id = employeeDto.Id;
-            this.FirstName = employeeDto.FirstName;
-            this.LastName = employeeDto.LastName;
-            this.Birthdate = employeeDto.Birthdate;
-            this.DepartmentId = employeeDto.Department.Id;
-
-            this.originalEmployeeDto = employeeDto;
+            this.editMode = editMode;
 
             this.Departments = new ObservableCollection<DepartmentDto>();
 
-            this.GetAllDepartments().ContinueWith(ct =>
+            this.LoadEmployeeDetail(employeeId);
+        }
+
+        public ObservableCollection<DepartmentDto> Departments { get; private set; }
+
+        public DepartmentDto SelecteDepartment
+        {
+            get { return this.selecteDepartment; }
+            set
             {
-                if (ct.Status == TaskStatus.RanToCompletion)
+                this.selecteDepartment = value;
+                this.RaisePropertyChanged(() => this.SelecteDepartment);
+            }
+        }
+
+        public bool IsAddButtonVisible
+        {
+            get { return this.editMode == EditMode.Add; }
+        }
+
+        public bool IsSaveButtonVisible
+        {
+            get { return this.editMode == EditMode.Edit; }
+        }
+
+        public int Id
+        {
+            get { return this.id; }
+            set
+            {
+                this.id = value;
+                this.RaisePropertyChanged(() => this.Id);
+            }
+        }
+
+        public string FirstName
+        {
+            get { return this.firstName; }
+            set
+            {
+                this.firstName = value;
+                this.RaisePropertyChanged(() => this.FirstName);
+            }
+        }
+
+        public string LastName
+        {
+            get { return this.lastName; }
+            set
+            {
+                this.lastName = value;
+                this.RaisePropertyChanged(() => this.LastName);
+            }
+        }
+
+        public DateTime Birthdate
+        {
+            get { return this.birthdate; }
+            set
+            {
+                this.birthdate = value;
+                this.RaisePropertyChanged(() => this.Birthdate);
+            }
+        }
+
+        public int DepartmentId
+        {
+            get { return this.departmentId; }
+            set
+            {
+                this.departmentId = value;
+                if (this.Departments != null)
                 {
-                    SelecteDepartmentDto = this.Departments.SingleOrDefault(d => d.Id == this.DepartmentId);
+                    this.SelecteDepartment = this.Departments.SingleOrDefault(d => d.Id == this.DepartmentId);
                 }
-            });
-
-            ButtonVisibility = false;
-            isFirstComboboxChange = true;
-        }
-
-        //Methods
-        //  Private
-        private bool ChangedEmployeeDto()
-        {
-            if (originalEmployeeDto.LastName == LastName
-                && originalEmployeeDto.FirstName == FirstName
-                && originalEmployeeDto.Birthdate == Birthdate
-                && originalEmployeeDto.Department.Id == DepartmentId)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
+                this.RaisePropertyChanged(() => this.DepartmentId);
             }
         }
-        private async Task GetAllDepartments()
+
+        private async void LoadEmployeeDetail(int employeeId)
         {
-            var departmentDtos = await employeeServiceClient.GetAllDepartments();
-            Departments.Clear();
-            foreach (DepartmentDto departmentDto in departmentDtos)
-            {
-                Departments.Add(departmentDto);
-            }
-        }
-        private void ResetEmployeeDtoValues()
-        {
-            FirstName = OriginalEmployeeDto.FirstName;
-            LastName = OriginalEmployeeDto.LastName;
-            Birthdate = OriginalEmployeeDto.Birthdate;
-            DepartmentId = OriginalEmployeeDto.Department.Id;
+            await this.LoadAllDepartments();
+            await this.LoadEmployeeById(employeeId);
         }
 
-        //  Public
-        public RelayCommand SaveEmployeeDtoRelayCommand
+        private async Task LoadAllDepartments()
+        {
+            try
+            {
+                var departmentDtos = await this.employeeServiceClient.GetAllDepartments();
+                this.Departments.Clear();
+                foreach (DepartmentDto departmentDto in departmentDtos)
+                {
+                    this.Departments.Add(departmentDto);
+                }
+            }
+            catch (Exception ex)
+            {
+                // TODO Show callout with exception
+            }
+        }
+
+        private async Task LoadEmployeeById(long employeeId)
+        {
+            try
+            {
+                var employeeDto = await this.employeeServiceClient.GetEmployeeById(employeeId);
+
+                this.Id = employeeDto.Id;
+                this.FirstName = employeeDto.FirstName;
+                this.LastName = employeeDto.LastName;
+                this.Birthdate = employeeDto.Birthdate;
+                this.DepartmentId = employeeDto.Department.Id;
+
+                this.SelecteDepartment = this.Departments.SingleOrDefault(d => d.Id == this.DepartmentId);
+            }
+            catch (Exception ex)
+            {
+                // TODO Show callout with exception
+            }
+        }
+
+        public RelayCommand AddEmployeeCommand
         {
             get
             {
-                return saveEmployeeDtoRelayCommand ?? new RelayCommand(() =>
+                return this.editEmployeeCommand ?? (this.editEmployeeCommand = new RelayCommand(() =>
                 {
-                    if (ChangedEmployeeDto())
-                    {
-                        //TODO: Save EmployeeDto to database
-                    }
-                });
+
+                }));
             }
         }
-        public RelayCommand CancelEmployeeEditingRelayCommand
+
+        public RelayCommand SaveEmployeeCommand
         {
             get
             {
-                return cancelEmployeeEditingRelayCommand ?? new RelayCommand(() =>
+                return this.saveEmployeeCommand ?? (this.saveEmployeeCommand = new RelayCommand(() =>
                 {
-                    ResetEmployeeDtoValues();
-                    ButtonVisibility = false;
-                });
+                    
+                }));
             }
         }
-        public RelayCommand EmployeeDtoValueChangedCommand
+
+        public RelayCommand CancelChangesCommand
         {
             get
             {
-                return employeeDtoValueChangedCommand ?? new RelayCommand(() =>
+                return this.cancelChangesCommand ?? (this.cancelChangesCommand = new RelayCommand(() =>
                 {
-                    if (!isFirstComboboxChange)
-                    {
-                        ButtonVisibility = true;
-                    }
-                    else
-                    {
-                        isFirstComboboxChange = false;
-                    }
-                });
+                    //TODO: Ask to save/discard changes
+                    this.LoadEmployeeDetail(this.Id);
+                }));
             }
         }
     }

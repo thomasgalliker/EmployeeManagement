@@ -44,9 +44,9 @@
                   SelectedItem="{Binding SelectedEmployeeDto, Mode=TwoWay}" 
                   SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding FirstName}" />
-                <DataGridTextColumn Binding="{Binding LastName}" />
-                <DataGridTextColumn Binding="{Binding Birthdate, Converter={StaticResource DateTimeConverter}}"/>
+                <DataGridTextColumn Binding="{Binding FirstName}" Header="First name" />
+                <DataGridTextColumn Binding="{Binding LastName}" Header="Last name" />
+                <DataGridTextColumn Binding="{Binding Birthdate, Converter={StaticResource DateTimeConverter}}" Header="Birthdate" />
             </DataGrid.Columns>
         </DataGrid>
         <TextBlock HorizontalAlignment="Left" Margin="10,7,0,0" Grid.Row="1" 

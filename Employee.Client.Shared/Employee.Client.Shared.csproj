@@ -38,6 +38,7 @@
     <Compile Include="Service\EmployeeServiceClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\IEmployeeServiceClient.cs" />
+    <Compile Include="ViewModel\EditMode.cs" />
     <Compile Include="ViewModel\EmployeeDetailViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
