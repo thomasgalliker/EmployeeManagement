@@ -30,7 +30,7 @@ namespace Employee.Service
             this.dtoToEmployeeMapper = dtoToEmployeeMapper;
         }
 
-        [WebInvoke(Method="POST")]
+        [WebInvoke(Method = "POST")]
         public void CreateEmployee(EmployeeDto employeeDto)
         {
             try
@@ -61,6 +61,25 @@ namespace Employee.Service
 
                     var allEmployees = employeeService.GetAllEmployees();
                     return this.ConvertToDto(allEmployees);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new FaultException(ex.Message);
+            }
+        }
+
+        [WebInvoke(Method = "POST")]
+        public EmployeeDto GetEmployeeById(long id)
+        {
+            try
+            {
+                using (var httpRequestScope = AutofacHostFactory.Container.BeginLifetimeScope(MatchingScopeLifetimeTags.RequestLifetimeScopeTag))
+                {
+                    var employeeService = httpRequestScope.Resolve<IEmployeeManager>();
+
+                    var employee = employeeService.GetEmployeeById(id);
+                    return this.employeeToDtoMapper.Map(employee);
                 }
             }
             catch (Exception ex)

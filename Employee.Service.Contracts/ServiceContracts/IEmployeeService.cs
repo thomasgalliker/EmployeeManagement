@@ -15,6 +15,9 @@ namespace Employee.Service.Contracts.ServiceContracts
         IEnumerable<EmployeeDto> GetAllEmployees();
 
         [OperationContract]
+        EmployeeDto GetEmployeeById(long id);
+
+        [OperationContract]
         void CreateDepartment(DepartmentDto department);
 
         [OperationContract]

@@ -10,6 +10,8 @@ namespace Employee.Client.Shared.Service
     {
         Task<IList<EmployeeDto>> GetAllEmployees();
 
+        Task<EmployeeDto> GetEmployeeById(long id);
+
         Task CreateEmployee(EmployeeDto employee);
 
         Task<IList<DepartmentDto>> GetAllDepartments();

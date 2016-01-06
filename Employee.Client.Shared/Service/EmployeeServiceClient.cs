@@ -47,6 +47,12 @@ namespace Employee.Client.Shared.Service
             return response;
         }
 
+        public Task<EmployeeDto> GetEmployeeById(long id)
+        {
+            var response = this.HandleHttpRequestAsync<EmployeeDto>(HttpMethod.Post, id);
+            return response;
+        }
+
         public Task CreateEmployee(EmployeeDto employee)
         {
             return this.HandleHttpRequestAsync<IList<EmployeeDto>>(HttpMethod.Post, employee);
@@ -75,7 +81,7 @@ namespace Employee.Client.Shared.Service
                 (int)httpResponseMessage.StatusCode,
                 httpResponseMessage.StatusCode);
 
-            return default(T);
+            throw new Exception("Could not load data.");
         }
 
         public Task<IList<DepartmentDto>> GetAllDepartments()
