@@ -11,5 +11,9 @@ namespace Employee.Client.Shared.Service
         Task<IList<EmployeeDto>> GetAllEmployees();
 
         Task CreateEmployee(EmployeeDto employee);
+
+        Task<IList<DepartmentDto>> GetAllDepartments();
+
+        Task CreateDepartment(DepartmentDto department);
     }
 }
