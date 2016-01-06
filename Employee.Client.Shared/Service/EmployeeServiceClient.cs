@@ -77,5 +77,16 @@ namespace Employee.Client.Shared.Service
 
             return default(T);
         }
+
+        public Task<IList<DepartmentDto>> GetAllDepartments()
+        {
+            var response = this.HandleHttpRequestAsync<IList<DepartmentDto>>(HttpMethod.Get);
+            return response;
+        }
+
+        public Task CreateDepartment(DepartmentDto department)
+        {
+            return this.HandleHttpRequestAsync<IList<DepartmentDto>>(HttpMethod.Post, department);
+        }
     }
 }
