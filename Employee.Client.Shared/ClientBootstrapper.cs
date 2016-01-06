@@ -9,11 +9,6 @@ namespace Employee.Client.Shared
 {
     public class ClientBootstrapper : Bootstrapper
     {
-        public ClientBootstrapper()
-        {
-            
-        }
-
         protected override void ConfigureContainer(ISimpleIoc container)
         {
             base.ConfigureContainer(container);
