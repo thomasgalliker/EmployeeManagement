@@ -78,5 +78,22 @@ namespace Employee.Client.Shared.Service
 
             return default(T);
         }
+
+        public Task<IList<DepartmentDto>> GetAllDepartments()
+        {
+            // http://stackoverflow.com/questions/10679214/how-do-you-set-the-content-type-header-for-an-httpclient-request
+            ////HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "relativeAddress");
+            ////request.Content = new StringContent("{\"name\":\"John Doe\",\"age\":33}",
+            ////                                    Encoding.UTF8,
+            ////                                    "application/json");
+
+            var response = this.HandleHttpRequestAsync<IList<DepartmentDto>>(HttpMethod.Get);
+            return response;
+        }
+
+        public Task CreateDepartment(DepartmentDto department)
+        {
+            return this.HandleHttpRequestAsync<IList<DepartmentDto>>(HttpMethod.Post, department);
+        }
     }
 }

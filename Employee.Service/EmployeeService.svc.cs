@@ -98,6 +98,7 @@ namespace Employee.Service
                        };
         }
 
+        [WebGet]
         public IEnumerable<DepartmentDto> GetAllDepartments()
         {
             try
@@ -127,6 +128,7 @@ namespace Employee.Service
             return allDepartments.Select(department =>
                 new DepartmentDto
                 {
+                    Id = department.Id,
                     Name = department.Name,
                     Leader = this.employeeToDtoMapper.Map(department.Leader),
                     Employees = department.Employees.Select(this.employeeToDtoMapper.Map).ToList()

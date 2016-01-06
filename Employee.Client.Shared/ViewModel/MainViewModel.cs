@@ -13,22 +13,37 @@ using Guards;
 
 namespace Employee.Client.Shared.ViewModel
 {
-    public class MainViewModel : ViewModelBase, INotifyPropertyChanged
+    public class MainViewModel : ViewModelBase
     {
-        private readonly IEmployeeServiceClient employeeServiceClient;
+        //Properties
+        public EmployeeDetailViewModel EmployeeDetailViewModel
+        {
+            get { return _employeeDetailViewModel; }
+            set
+            {
+                _employeeDetailViewModel = value; 
+                this.RaisePropertyChanged(() => this.EmployeeDetailViewModel);
+            }
+        }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        private readonly IEmployeeServiceClient employeeServiceClient;
 
         private RelayCommand getAllEmployeesCommand;
 
         private EmployeeDto selectedEmployeeDto;
+        private EmployeeDetailViewModel _employeeDetailViewModel;
+
         public EmployeeDto SelectedEmployeeDto
         {
             get { return selectedEmployeeDto; }
             set
             {
-                selectedEmployeeDto = value;
-                OnPropertyChanged("SelectedEmployeeDto");
+                if (this.selectedEmployeeDto != value)
+                {
+                    this.selectedEmployeeDto = value;
+                    this.EmployeeDetailViewModel = new EmployeeDetailViewModel(employeeServiceClient, value);
+                    this.RaisePropertyChanged("SelectedEmployeeDto");
+                }
             }
         }
 
@@ -39,15 +54,6 @@ namespace Employee.Client.Shared.ViewModel
             this.employeeServiceClient = employeeServiceClient;
 
             this.Employees = new ObservableCollection<EmployeeDto>();
-        }
-
-        protected void OnPropertyChanged(string name)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
         }
 
         public ObservableCollection<EmployeeDto> Employees { get; private set; }
