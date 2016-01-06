@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:converters="clr-namespace:Employee.Client.WPF.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="400"
-             DataContext="{Binding}">
+             DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:DateTimeConverter x:Key="DateTimeConverter" Format="d" MinValueString="-"/>
@@ -21,30 +22,88 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
+
         <TextBlock TextWrapping="Wrap"
                    TextAlignment="Left" 
                    Text="Details" 
                    FontWeight="Bold" 
                    FontSize="30"
                    Grid.Row="0"/>
-        
+
         <Label Grid.Row="1">ID:</Label>
         <Label Grid.Row="2">Last name:</Label>
         <Label Grid.Row="3">First name:</Label>
         <Label Grid.Row="4">Birth date:</Label>
         <Label Grid.Row="5">Department:</Label>
 
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding SelectedEmployeeDto.Id, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding SelectedEmployeeDto.LastName, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding SelectedEmployeeDto.FirstName, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-        <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding SelectedEmployeeDto.Birthdate, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DateTimeConverter}}"></TextBlock>
-        <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding SelectedEmployeeDto.Department.Name, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding EmployeeDetailViewModel.Id, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding EmployeeDetailViewModel.LastName, UpdateSourceTrigger=PropertyChanged}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="TextChanged">
+                    <i:InvokeCommandAction Command="{Binding EmployeeDetailViewModel.EmployeeDtoValueChangedCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding EmployeeDetailViewModel.FirstName, UpdateSourceTrigger=PropertyChanged}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="TextChanged">
+                    <i:InvokeCommandAction Command="{Binding EmployeeDetailViewModel.EmployeeDtoValueChangedCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding EmployeeDetailViewModel.Birthdate, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DateTimeConverter}}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="TextChanged">
+                    <i:InvokeCommandAction Command="{Binding EmployeeDetailViewModel.EmployeeDtoValueChangedCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
+        <ComboBox Grid.Column="1"
+                      Grid.Row="5"
+                      ItemsSource="{Binding Path=EmployeeDetailViewModel.Departments}" 
+                      SelectedItem="{Binding EmployeeDetailViewModel.SelecteDepartmentDto , Mode= TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      DisplayMemberPath="Name">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding EmployeeDetailViewModel.EmployeeDtoValueChangedCommand}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ComboBox>
+
+        <StackPanel Grid.Column="1" Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <Button Content="Save" Margin="5" Command="{Binding EmployeeDetailViewModel.SaveEmployeeDtoRelayCommand}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <!-- This would be the default visibility -->
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Style.Triggers>
+                            <DataTrigger Binding = "{Binding EmployeeDetailViewModel.ButtonVisibility, UpdateSourceTrigger=PropertyChanged}" Value = "False">
+                                <Setter Property="Visibility" Value="Hidden" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Content="Cancel" Margin="5" Command="{Binding EmployeeDetailViewModel.CancelEmployeeEditingRelayCommand}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <!-- This would be the default visibility -->
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Style.Triggers>
+                            <DataTrigger Binding = "{Binding EmployeeDetailViewModel.ButtonVisibility, UpdateSourceTrigger=PropertyChanged}" Value = "False">
+                                <Setter Property="Visibility" Value="Hidden" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>

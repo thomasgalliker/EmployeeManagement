@@ -22,11 +22,11 @@ namespace Employee.Client.Shared.ViewModel
         private DepartmentDto selecteDepartmentDto;
         private EmployeeDto originalEmployeeDto;
         private bool buttonVisibility;
-        private int _departmentId;
-        private DateTime _birthdate;
-        private string _lastName;
-        private string _firstName;
-        private int _id;
+        private int id;
+        private string firstName;
+        private string lastName;
+        private DateTime birthdate;
+        private int departmentId;
         private RelayCommand saveEmployeeDtoRelayCommand;
         private RelayCommand cancelEmployeeEditingRelayCommand;
         private RelayCommand employeeDtoValueChangedCommand;
@@ -41,7 +41,7 @@ namespace Employee.Client.Shared.ViewModel
             set
             {
                 selecteDepartmentDto = value;
-                RaisePropertyChanged("SelecteDepartmentDto");
+                RaisePropertyChanged(() => this.SelecteDepartmentDto);
             }
         }
         public EmployeeDto OriginalEmployeeDto
@@ -54,58 +54,60 @@ namespace Employee.Client.Shared.ViewModel
             set
             {
                 buttonVisibility = value;
-                RaisePropertyChanged("ButtonVisibility");
-            }
-        }
-        public int DepartmentId
-        {
-            get { return _departmentId; }
-            set
-            {
-                _departmentId = value;
-                if (Departments != null)
-                {
-                    SelecteDepartmentDto = this.Departments.SingleOrDefault(d => d.Id == this.DepartmentId);    
-                }
-                RaisePropertyChanged("DepartmentId");
-            }
-        }
-        public DateTime Birthdate
-        {
-            get { return _birthdate; }
-            set
-            {
-                _birthdate = value;
-                RaisePropertyChanged("Birthdate");
-            }
-        }
-        public string LastName
-        {
-            get { return _lastName; }
-            set
-            {
-                _lastName = value;
-                RaisePropertyChanged("LastName");
-            }
-        }
-        public string FirstName
-        {
-            get { return _firstName; }
-            set
-            {
-                _firstName = value;
-                RaisePropertyChanged("FirstName");
+                RaisePropertyChanged(() => this.ButtonVisibility);
             }
         }
         public int Id
         {
-            get { return _id; }
+            get { return id; }
             set
             {
-                _id = value;
-                RaisePropertyChanged("Id");
+                id = value;
+                RaisePropertyChanged(() => this.Id);
             }
         }
+        public string FirstName
+        {
+            get { return firstName; }
+            set
+            {
+                firstName = value;
+                RaisePropertyChanged(() => this.FirstName);
+            }
+        }
+        public string LastName
+        {
+            get { return lastName; }
+            set
+            {
+                lastName = value;
+                RaisePropertyChanged(() => this.LastName);
+            }
+        }
+        public DateTime Birthdate
+        {
+            get { return birthdate; }
+            set
+            {
+                birthdate = value;
+                RaisePropertyChanged(() => this.Birthdate);
+            }
+        }
+        public int DepartmentId
+        {
+            get { return departmentId; }
+            set
+            {
+                departmentId = value;
+                if (Departments != null)
+                {
+                    SelecteDepartmentDto = this.Departments.SingleOrDefault(d => d.Id == this.DepartmentId);
+                }
+                RaisePropertyChanged(() => this.DepartmentId);
+            }
+        }
+        
+        
 
         //Constructors
         public EmployeeDetailViewModel(IEmployeeServiceClient employeeServiceClient, EmployeeDto employeeDto)
@@ -159,7 +161,6 @@ namespace Employee.Client.Shared.ViewModel
                 Departments.Add(departmentDto);
             }
         }
-
         private void ResetEmployeeDtoValues()
         {
             FirstName = OriginalEmployeeDto.FirstName;
