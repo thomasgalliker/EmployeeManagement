@@ -35,7 +35,16 @@ namespace Employee.BusinessLogic
 
         public ICollection<Model.Employee> GetAllEmployees()
         {
-            return this.employeeRepository.Get(x => x.Department).ToList();
+            return this.employeeRepository
+                .Get(x => x.Department)
+                .ToList();
+        }
+
+        public Model.Employee GetEmployeeById(long id)
+        {
+            return this.employeeRepository
+                .Get(x => x.Department)
+                .Single(e => e.Id == id);
         }
 
         public Model.Employee CreateEmployee(Model.Employee employee)
