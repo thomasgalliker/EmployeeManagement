@@ -36,11 +36,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CrossPlatformLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CrossPlatformLibrary.1.0.67-alpha\lib\net45\CrossPlatformLibrary.dll</HintPath>
+      <HintPath>..\packages\CrossPlatformLibrary.1.0.71\lib\net45\CrossPlatformLibrary.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="CrossPlatformLibrary.Platform, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CrossPlatformLibrary.1.0.67-alpha\lib\net45\CrossPlatformLibrary.Platform.dll</HintPath>
+      <HintPath>..\packages\CrossPlatformLibrary.1.0.71\lib\net45\CrossPlatformLibrary.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
