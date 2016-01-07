@@ -13,11 +13,10 @@ namespace Employee.Client.Shared.ViewModel
 {
     public class EmployeeDetailViewModel : ViewModelBase
     {
-        //Private fields
         private readonly IEmployeeServiceClient employeeServiceClient;
+        private readonly EditMode editMode;
 
         private DepartmentDto selecteDepartment;
-        private bool buttonVisibility;
         private int id;
         private string firstName;
         private string lastName;
@@ -26,7 +25,6 @@ namespace Employee.Client.Shared.ViewModel
         private RelayCommand saveEmployeeCommand;
         private RelayCommand cancelChangesCommand;
         private RelayCommand editEmployeeCommand;
-        private readonly EditMode editMode;
 
         public EmployeeDetailViewModel(IEmployeeServiceClient employeeServiceClient, int employeeId, EditMode editMode)
         {

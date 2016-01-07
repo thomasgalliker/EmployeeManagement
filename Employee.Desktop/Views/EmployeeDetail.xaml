@@ -11,6 +11,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:DateTimeConverter x:Key="DateTimeConverter" Format="d" MinValueString="-"/>
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -44,68 +45,29 @@
         <Label Grid.Row="5">Department:</Label>
 
         <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding EmployeeDetailViewModel.Id, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding EmployeeDetailViewModel.LastName, UpdateSourceTrigger=PropertyChanged}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="TextChanged">
-                    <i:InvokeCommandAction Command="{Binding EmployeeDetailViewModel.EmployeeDtoValueChangedCommand}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </TextBox>
-        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding EmployeeDetailViewModel.FirstName, UpdateSourceTrigger=PropertyChanged}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="TextChanged">
-                    <i:InvokeCommandAction Command="{Binding EmployeeDetailViewModel.EmployeeDtoValueChangedCommand}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </TextBox>
-        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding EmployeeDetailViewModel.Birthdate, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DateTimeConverter}}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="TextChanged">
-                    <i:InvokeCommandAction Command="{Binding EmployeeDetailViewModel.EmployeeDtoValueChangedCommand}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </TextBox>
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding EmployeeDetailViewModel.LastName, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding EmployeeDetailViewModel.FirstName, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding EmployeeDetailViewModel.Birthdate, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DateTimeConverter}}"/>
         <ComboBox Grid.Column="1"
                       Grid.Row="5"
                       ItemsSource="{Binding Path=EmployeeDetailViewModel.Departments}" 
                       SelectedItem="{Binding EmployeeDetailViewModel.SelecteDepartment , Mode= TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      DisplayMemberPath="Name">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding EmployeeDetailViewModel.EmployeeDtoValueChangedCommand}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </ComboBox>
+                      DisplayMemberPath="Name"/>
 
         <StackPanel Grid.Column="1" Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Right" >
-            <Button Content="Save" Margin="5" Command="{Binding EmployeeDetailViewModel.SaveEmployeeCommand}">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <!-- This would be the default visibility -->
-                        <Setter Property="Visibility" Value="Visible" />
-                        <Style.Triggers>
-                            <DataTrigger Binding = "{Binding EmployeeDetailViewModel.IsSaveButtonVisible, UpdateSourceTrigger=PropertyChanged}" Value = "False">
-                                <Setter Property="Visibility" Value="Hidden" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-            <Button Content="Edit" Margin="5" Command="{Binding EmployeeDetailViewModel.AddEmployeeCommand}">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <!-- This would be the default visibility -->
-                        <Setter Property="Visibility" Value="Visible" />
-                        <Style.Triggers>
-                            <DataTrigger Binding = "{Binding EmployeeDetailViewModel.IsAddButtonVisible, UpdateSourceTrigger=PropertyChanged}" Value = "False">
-                                <Setter Property="Visibility" Value="Hidden" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-            <Button Content="Cancel" Margin="5" Command="{Binding EmployeeDetailViewModel.CancelChangesCommand}">
-            </Button>
+            <Button Content="Save" 
+                    Margin="5" 
+                    Command="{Binding EmployeeDetailViewModel.SaveEmployeeCommand}"
+                    Visibility="{Binding EmployeeDetailViewModel.IsSaveButtonVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
+            
+            <Button Content="Edit" 
+                    Margin="5"
+                    Command="{Binding EmployeeDetailViewModel.AddEmployeeCommand}" 
+                    Visibility="{Binding EmployeeDetailViewModel.IsAddButtonVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
+            
+            <Button Content="Cancel" 
+                    Margin="5" 
+                    Command="{Binding EmployeeDetailViewModel.CancelChangesCommand}" />
         </StackPanel>
     </Grid>
 </UserControl>

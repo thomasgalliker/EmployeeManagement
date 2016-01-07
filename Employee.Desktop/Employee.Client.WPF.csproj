@@ -93,6 +93,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BoolToVisiblityConverter.cs" />
     <Compile Include="Converters\DateTimeConverter.cs" />
     <Compile Include="Views\EmployeeDetail.xaml.cs">
       <DependentUpon>EmployeeDetail.xaml</DependentUpon>
