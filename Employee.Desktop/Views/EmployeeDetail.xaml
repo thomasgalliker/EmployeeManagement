@@ -12,6 +12,7 @@
         <ResourceDictionary>
             <converters:DateTimeConverter x:Key="DateTimeConverter" Format="d" MinValueString="-"/>
             <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <converters:BirthdayToDaysConverter x:Key="BirthdayToDaysConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -47,7 +48,11 @@
         <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding EmployeeDetailViewModel.Id, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
         <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding EmployeeDetailViewModel.LastName, UpdateSourceTrigger=PropertyChanged}" />
         <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding EmployeeDetailViewModel.FirstName, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding EmployeeDetailViewModel.Birthdate, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DateTimeConverter}}"/>
+        <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal">
+            <TextBox MinWidth="120" Text="{Binding EmployeeDetailViewModel.Birthdate, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DateTimeConverter}}"/>
+            <TextBlock Text="{Binding EmployeeDetailViewModel.Birthdate, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BirthdayToDaysConverter}}"></TextBlock>
+        </StackPanel>
+        
         <ComboBox Grid.Column="1"
                       Grid.Row="5"
                       ItemsSource="{Binding Path=EmployeeDetailViewModel.Departments}" 
@@ -59,12 +64,12 @@
                     Margin="5" 
                     Command="{Binding EmployeeDetailViewModel.SaveEmployeeCommand}"
                     Visibility="{Binding EmployeeDetailViewModel.IsSaveButtonVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
-            
+
             <Button Content="Edit" 
                     Margin="5"
                     Command="{Binding EmployeeDetailViewModel.AddEmployeeCommand}" 
                     Visibility="{Binding EmployeeDetailViewModel.IsAddButtonVisible, Converter={StaticResource BoolToVisibilityConverter}}" />
-            
+
             <Button Content="Cancel" 
                     Margin="5" 
                     Command="{Binding EmployeeDetailViewModel.CancelChangesCommand}" />
