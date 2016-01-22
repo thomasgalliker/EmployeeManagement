@@ -68,6 +68,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.ServiceModel" />
@@ -84,6 +85,10 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="ValueConverters, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ValueConverters.1.0.2-pre1\lib\net45\ValueConverters.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -94,8 +99,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\BirthdayToDaysConverter.cs" />
-    <Compile Include="Converters\BoolToVisiblityConverter.cs" />
-    <Compile Include="Converters\DateTimeConverter.cs" />
     <Compile Include="Views\EmployeeDetail.xaml.cs">
       <DependentUpon>EmployeeDetail.xaml</DependentUpon>
     </Compile>
