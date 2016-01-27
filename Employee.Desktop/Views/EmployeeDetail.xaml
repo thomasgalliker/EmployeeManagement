@@ -5,13 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:converters="clr-namespace:Employee.Client.WPF.Converters"
+             xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="400"
              DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
     <UserControl.Resources>
         <ResourceDictionary>
-            <converters:DateTimeConverter x:Key="DateTimeConverter" Format="d" MinValueString="-"/>
-            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <valueConverters:DateTimeConverter x:Key="DateTimeConverter" Format="d" MinValueString="-"/>
+            <valueConverters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <converters:BirthdayToDaysConverter x:Key="BirthdayToDaysConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>

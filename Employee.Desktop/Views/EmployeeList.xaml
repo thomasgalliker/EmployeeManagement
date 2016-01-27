@@ -7,13 +7,14 @@
         xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
         xmlns:ignore="http://www.ignore.com"
         xmlns:converters="clr-namespace:Employee.Client.WPF.Converters"
+        xmlns:valueConverters="clr-namespace:ValueConverters;assembly=ValueConverters"
         mc:Ignorable="d ignore"
         d:DesignHeight="600"
         d:DesignWidth="800"
         DataContext="{Binding}">
     <UserControl.Resources>
         <ResourceDictionary>
-            <converters:DateTimeConverter x:Key="DateTimeConverter" Format="d" MinValueString="-"/>
+            <valueConverters:DateTimeConverter x:Key="DateTimeConverter" Format="d" MinValueString="-"/>
         </ResourceDictionary>
     </UserControl.Resources>
 
