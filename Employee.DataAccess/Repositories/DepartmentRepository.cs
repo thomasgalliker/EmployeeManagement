@@ -3,6 +3,7 @@
 using Employee.DataAccess.Abstractions;
 using Employee.Model;
 
+using EntityFramework.Toolkit;
 
 namespace Employee.DataAccess.Repositories
 {

@@ -1,9 +1,10 @@
-﻿
-using Autofac;
+﻿using Autofac;
 
 using Employee.DataAccess.Abstractions;
-using Employee.DataAccess.Core;
 using Employee.DataAccess.Repositories;
+
+using EntityFramework.Toolkit;
+using EntityFramework.Toolkit.Core;
 
 namespace Employee.DataAccess.Configuration
 {

@@ -2,6 +2,8 @@
 
 using Employee.DataAccess.Abstractions;
 
+using EntityFramework.Toolkit;
+
 namespace Employee.DataAccess.Repositories
 {
     public class EmployeeRepository : GenericRepository<Model.Employee>, IEmployeeRepository

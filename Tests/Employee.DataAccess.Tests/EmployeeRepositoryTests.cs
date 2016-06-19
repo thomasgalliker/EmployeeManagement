@@ -68,7 +68,7 @@ namespace Employee.DataAccess.Tests
                 var numberOfAdds = +employeeContext.SaveChanges();
 
                 // Act
-                employeeRepository.Delete(employee2);
+                employeeRepository.Remove(employee2);
                 var numberOfDeletes =+ employeeContext.SaveChanges();
 
                 // Assert

@@ -1,4 +1,5 @@
-﻿
+﻿using EntityFramework.Toolkit.Core;
+
 namespace Employee.DataAccess.Abstractions
 {
     public interface IDepartmentRepository : IGenericRepository<Model.Department>

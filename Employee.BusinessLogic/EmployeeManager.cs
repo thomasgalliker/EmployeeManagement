@@ -6,6 +6,8 @@ using Employee.BusinessLogic.Abstractions;
 using Employee.DataAccess.Abstractions;
 using Employee.Model;
 
+using EntityFramework.Toolkit.Core;
+
 using Guards;
 
 namespace Employee.BusinessLogic

@@ -1,14 +1,16 @@
 ﻿using System.Data.Entity;
 using System.Diagnostics;
 
-using Employee.DataAccess.Core;
 using Employee.DataAccess.Mapping;
 using Employee.DataAccess.Utils;
+
+using EntityFramework.Toolkit;
+using EntityFramework.Toolkit.Extensions;
 
 namespace Employee.DataAccess
 {
     [DbConfigurationType(typeof(EmployeeDbConfiguration))]
-    public class EmployeeContext : DbContextBase, IEmployeeContext
+    public class EmployeeContext : DbContextBase<EmployeeContext>, IEmployeeContext
     {
         public EmployeeContext(IDatabaseInitializer<EmployeeContext> initializer = null)
         {

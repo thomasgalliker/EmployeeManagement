@@ -30,15 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework.Toolkit.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.Toolkit.Core.1.0.2-pre3\lib\net45\EntityFramework.Toolkit.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IContext.cs" />
     <Compile Include="IDepartmentRepository.cs" />
     <Compile Include="IEmployeeRepository.cs" />
-    <Compile Include="IGenericRepository.cs" />
-    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -46,6 +47,9 @@
       <Project>{f351b308-3b22-4949-9ac0-507c8b0c3bd5}</Project>
       <Name>Employee.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
