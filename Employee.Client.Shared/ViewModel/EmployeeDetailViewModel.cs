@@ -170,9 +170,14 @@ namespace Employee.Client.Shared.ViewModel
         {
             get
             {
-                return this.saveEmployeeCommand ?? (this.saveEmployeeCommand = new RelayCommand(() =>
+                return this.saveEmployeeCommand ?? (this.saveEmployeeCommand = new RelayCommand(async () =>
                 {
-                    
+                    await this.employeeServiceClient.CreateEmployee(new EmployeeDto
+                    {
+                        FirstName = this.FirstName,
+                        LastName = this.LastName,
+                        Birthdate = this.Birthdate,
+                    });
                 }));
             }
         }
